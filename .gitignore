@@ -1,0 +1,11 @@
+# secrets
+config.json
+
+# runtime/cache
+.cache/
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
