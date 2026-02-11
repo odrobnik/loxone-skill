@@ -30,7 +30,8 @@ def load_config():
             "host": "192.168.0.222",
             "username": "your_username",
             "password": "your_password",
-            "use_https": False
+            "use_https": True,
+            "verify_ssl": True
         }, indent=2))
         sys.exit(1)
     

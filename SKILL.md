@@ -1,5 +1,8 @@
 ---
 name: loxone
+version: 1.0.2
+homepage: https://github.com/odrobnik/loxone-skill
+metadata: {"openclaw": {"emoji": "🏠", "requires": {"bins": ["python3"]}}}
 description: Control and monitor a Loxone Miniserver (smart home) via HTTP API and real-time WebSocket. Use for querying room/device status (temperatures, lights), watching live events, and sending safe control commands.
 ---
 
@@ -18,3 +21,8 @@ description: Control and monitor a Loxone Miniserver (smart home) via HTTP API a
 ## Notes
 - Treat as **read-only by default**; only use control commands when explicitly requested.
 - WebSocket auth can be finicky; if WS fails, fall back to HTTP status queries.
+
+
+## Security
+- HTTPS + certificate verification is enabled by default.
+- If your Miniserver uses a self-signed cert, either install the cert or set `verify_ssl: false` in config.json (or export `LOXONE_INSECURE_SSL=1`).
