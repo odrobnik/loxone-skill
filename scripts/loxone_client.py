@@ -8,6 +8,8 @@ import requests
 import json
 import base64
 import os
+
+from loxone_config import resolve_config
 from typing import Dict, List, Optional, Any
 from pathlib import Path
 
@@ -379,13 +381,14 @@ class LoxoneClient:
         """
         try:
             with open(config_path, 'r') as f:
-                config = json.load(f)
+                config = resolve_config(json.load(f))
             
             return cls(
                 host=config['host'],
                 username=config['username'],
                 password=config['password'],
-                use_https=config.get('use_https', False)
+                use_https=config.get('use_https', True),
+                verify_ssl=config.get('verify_ssl', True),
             )
         except FileNotFoundError:
             raise Exception(f"Config file not found: {config_path}")

@@ -3,6 +3,7 @@ config.json
 
 # runtime/cache
 .cache/
+installation_map.json
 __pycache__/
 *.pyc
 .venv/

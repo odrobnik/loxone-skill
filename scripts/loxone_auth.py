@@ -204,15 +204,18 @@ def main():
     from pathlib import Path
     
     # Load config
+    from loxone_config import load_config_file
+
     config_path = Path(__file__).parent.parent / "config.json"
-    with open(config_path) as f:
-        config = json.load(f)
+    config = load_config_file(str(config_path))
     
     # Create auth client
     auth = LoxoneAuth(
         host=config['host'],
         username=config['username'],
-        password=config['password']
+        password=config['password'],
+        use_https=config.get('use_https', True),
+        verify_ssl=config.get('verify_ssl', True),
     )
     
     # Authenticate

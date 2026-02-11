@@ -58,13 +58,13 @@ from loxone_client import LoxoneClient
 # Add scripts dir to path
 sys.path.insert(0, str(Path(__file__).parent))
 from loxone_ws import LoxoneWS
+from loxone_config import load_config_file
 
 
 def load_config():
-    """Load Loxone connection config."""
+    """Load Loxone connection config (supports Cloud DNS shorthand)."""
     config_path = Path(__file__).parent.parent / "config.json"
-    with open(config_path) as f:
-        return json.load(f)
+    return load_config_file(str(config_path))
 
 
 def download_structure(host: str, username: str, password: str, *, use_https: bool, verify_ssl: bool) -> str:
