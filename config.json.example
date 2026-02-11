@@ -2,10 +2,6 @@
   "host": "192.168.0.222",
   "username": "your_username",
   "password": "your_password",
-  "use_https": true,
+  "use_https": false,
   "verify_ssl": true
-
-  // Or: Cloud DNS tunnel without hard-coding IP
-  // "host": "dns.loxonecloud.com/504F94A22C29"
-
 }

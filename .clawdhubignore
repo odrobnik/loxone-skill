@@ -1,0 +1,7 @@
+# Exclude secrets + runtime/cache
+config.json
+installation_map.json
+.cache/
+__pycache__/
+*.pyc
+.DS_Store

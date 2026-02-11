@@ -11,6 +11,15 @@ description: Control and monitor a Loxone Miniserver (smart home) via HTTP API a
 ## Setup
 - Create `config.json` next to this file (it is gitignored). Start from `config.json.example`.
 
+### Config: Local vs Cloud DNS tunnel
+The `host` value can be either:
+- **Local**: an IP/hostname, e.g. `192.168.0.222` (typically `use_https: false` on LAN), or
+- **Cloud DNS shorthand** (preferred for remote access; avoids hard-coded IPs):
+  - `dns.loxonecloud.com/504F94A22C29` (or just `504F94A22C29`)
+
+When you use the Cloud DNS shorthand, the skill resolves it at runtime to the
+certificate-matching `*.dyndns.loxonecloud.com` hostname (including port).
+
 ## Commands
 - `python3 scripts/loxone.py rooms`
 - `python3 scripts/loxone.py map`
