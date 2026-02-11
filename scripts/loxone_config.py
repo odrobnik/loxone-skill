@@ -8,7 +8,7 @@ Supports two connection modes:
    use_https: false
 
 2) Cloud DNS tunnel (do NOT hard-code the IP):
-   host: "dns.loxonecloud.com/504F94A22C29"  (or just the serial "504F94A22C29")
+   host: "dns.loxonecloud.com/<SERIAL>"  (or just the serial "<SERIAL>")
    use_https: true
 
 When a Cloud DNS host is used, we resolve the current IP/port via:

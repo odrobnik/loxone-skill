@@ -24,8 +24,8 @@ def load_config():
     """Load configuration from config.json.
 
     Supports Cloud DNS shorthand hosts like:
-      - dns.loxonecloud.com/504F94A22C29
-      - 504F94A22C29
+      - dns.loxonecloud.com/<SERIAL>
+      - <SERIAL>
 
     These are resolved at runtime to the certificate-matching dyndns hostname.
     """
@@ -43,7 +43,7 @@ def load_config():
         }, indent=2))
         print("\nOr use the Cloud DNS tunnel without hard-coding an IP:")
         print(json.dumps({
-            "host": "dns.loxonecloud.com/504F94A22C29",
+            "host": "dns.loxonecloud.com/<SERIAL>",
             "username": "your_username",
             "password": "your_password",
             "use_https": True,
