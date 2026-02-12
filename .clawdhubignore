@@ -1,7 +1,30 @@
-# Exclude secrets + runtime/cache
-config.json
-installation_map.json
-.cache/
+# Version control & OS
+.git/
+.DS_Store
+
+# Python caches
 __pycache__/
 *.pyc
-.DS_Store
+*.pyo
+.venv/
+venv/
+
+# Runtime artifacts
+*.log
+*.db
+*.sqlite
+
+# Secrets & credentials (never publish)
+.env
+secrets/
+tokens-*.json
+auth.json
+config.json
+*.pem
+
+# GitHub-only docs (SKILL.md serves as ClawHub readme)
+README.md
+
+# Cached data
+.cache/
+installation_map.json
