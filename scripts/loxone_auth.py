@@ -17,7 +17,7 @@ import uuid
 class LoxoneAuth:
     """Handles Loxone token-based authentication"""
     
-    def __init__(self, host: str, username: str, password: str, use_https: bool = True, verify_ssl: bool = True):
+    def __init__(self, host: str, username: str, password: str, use_https: bool = True):
         """
         Initialize Loxone authentication
         
@@ -26,14 +26,13 @@ class LoxoneAuth:
             username: Loxone username
             password: Loxone password
             use_https: Use HTTPS instead of HTTP (default: True)
-            verify_ssl: Verify SSL certificates (default: True; set LOXONE_INSECURE_SSL=1 to disable)
         """
         self.host = host
         self.username = username
         self.password = password
+        self.use_https = use_https
         self.protocol = "https" if use_https else "http"
         self.base_url = f"{self.protocol}://{self.host}"
-        self.verify_ssl = verify_ssl and os.environ.get("LOXONE_INSECURE_SSL") != "1"
         
         # Token storage
         self.token = None
@@ -54,7 +53,7 @@ class LoxoneAuth:
         url = f"{self.base_url}{endpoint}"
         
         try:
-            response = requests.get(url, timeout=10, verify=self.verify_ssl)
+            response = requests.get(url, timeout=10, verify=self.use_https)
             response.raise_for_status()
             return response
         except Exception as e:
@@ -215,7 +214,6 @@ def main():
         username=config['username'],
         password=config['password'],
         use_https=config.get('use_https', True),
-        verify_ssl=config.get('verify_ssl', True),
     )
     
     # Authenticate

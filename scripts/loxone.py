@@ -38,16 +38,14 @@ def load_config():
             "host": "192.168.0.222",
             "username": "your_username",
             "password": "your_password",
-            "use_https": True,
-            "verify_ssl": True
+            "use_https": True
         }, indent=2))
         print("\nOr use the Cloud DNS tunnel without hard-coding an IP:")
         print(json.dumps({
             "host": "dns.loxonecloud.com/<SERIAL>",
             "username": "your_username",
             "password": "your_password",
-            "use_https": True,
-            "verify_ssl": True
+            "use_https": True
         }, indent=2))
         sys.exit(1)
 
@@ -225,6 +223,14 @@ def cmd_control(args):
     device_name = args.device
     action = args.action.lower()
     room_name = args.room
+    
+    # Sanitize action value — must be a simple value (on/off/number/pulse)
+    # Block path traversal, command injection, URL manipulation
+    import re as _re
+    if not _re.match(r'^[a-zA-Z0-9._-]+$', action):
+        print(f"❌ Invalid action value: '{action}'")
+        print("Actions must be alphanumeric (e.g., on, off, pulse, 0-100)")
+        sys.exit(1)
     
     # Safety check: Only allow control commands in safe rooms
     if room_name and not is_safe_room(room_name):

@@ -67,7 +67,7 @@ def load_config():
     return load_config_file(str(config_path))
 
 
-def download_structure(host: str, username: str, password: str, *, use_https: bool, verify_ssl: bool) -> str:
+def download_structure(host: str, username: str, password: str, *, use_https: bool) -> str:
     """Download LoxAPP3.json from Miniserver, return path.
 
     Uses the same transport settings as the client (HTTPS by default).
@@ -80,7 +80,7 @@ def download_structure(host: str, username: str, password: str, *, use_https: bo
     if out.exists() and (time.time() - out.stat().st_mtime) < 3600:
         return str(out)
 
-    client = LoxoneClient(host, username, password, use_https=use_https, verify_ssl=verify_ssl)
+    client = LoxoneClient(host, username, password, use_https=use_https)
     client.fetch_structure(cache_file=str(out))
     return str(out)
 
@@ -179,13 +179,12 @@ async def run(args):
     passwd = config["password"]
 
     use_https = bool(config.get("use_https", True))
-    verify_ssl = bool(config.get("verify_ssl", True))
 
     # Download/cache structure
-    structure_path = download_structure(host, user, passwd, use_https=use_https, verify_ssl=verify_ssl)
+    structure_path = download_structure(host, user, passwd, use_https=use_https)
 
     # Create WebSocket client
-    ws = LoxoneWS(host, user, passwd, use_https=use_https, verify_ssl=verify_ssl)
+    ws = LoxoneWS(host, user, passwd, use_https=use_https)
     ws.load_structure(structure_path)
 
     # Apply filters

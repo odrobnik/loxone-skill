@@ -99,10 +99,6 @@ def resolve_config(raw: Dict[str, Any]) -> Dict[str, Any]:
     if "use_https" not in cfg:
         cfg["use_https"] = resolved.use_https
 
-    # Default to verifying SSL when using the tunnel.
-    if "verify_ssl" not in cfg:
-        cfg["verify_ssl"] = True
-
     return cfg
 
 

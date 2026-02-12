@@ -32,12 +32,11 @@ from typing import Callable, Dict, List, Optional, Tuple
 class LoxoneWS:
     """WebSocket client for real-time Loxone Miniserver state monitoring."""
 
-    def __init__(self, host: str, username: str, password: str, use_https: bool = True, verify_ssl: bool = True):
+    def __init__(self, host: str, username: str, password: str, use_https: bool = True):
         self.host = host
         self.username = username
         self.password = password
         self.use_https = use_https
-        self.verify_ssl = verify_ssl and os.environ.get("LOXONE_INSECURE_SSL") != "1"
         scheme = "wss" if use_https else "ws"
         self.ws_url = f"{scheme}://{host}/ws/rfc6455"
 
@@ -139,9 +138,6 @@ class LoxoneWS:
         ssl_ctx = None
         if self.use_https:
             ssl_ctx = ssl.create_default_context()
-            if not self.verify_ssl:
-                ssl_ctx.check_hostname = False
-                ssl_ctx.verify_mode = ssl.CERT_NONE
 
         self._ws = await websockets.connect(
             self.ws_url,
