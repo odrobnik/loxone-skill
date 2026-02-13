@@ -15,3 +15,9 @@ This repository contains the OpenClaw skill definition in **[`SKILL.md`](./SKILL
   ```bash
   python3 scripts/loxone.py rooms
   ```
+
+## Documentation
+
+- [SKILL.md](SKILL.md) — agent-facing reference (commands, behavior, limitations)
+- [SETUP.md](SETUP.md) — prerequisites, configuration, and setup instructions
+- [ClawHub](https://www.clawhub.com/skills/loxone) — install via ClawHub registry
